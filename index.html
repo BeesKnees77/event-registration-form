@@ -87,28 +87,37 @@
   <div id="status"></div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwGJBGiQ_SCEfxHNdT2et8cJNJr1EA0wrdEnH_fv_aDwj94mZy4g90jV0EmIPfHxCD6Dw/exec"; // Replace with your actual URL
+    
+function fetchData() {
+  const phone = document.getElementById("phone").value;
 
-    function fetchData() {
-      const phone = document.getElementById("phone").value;
-      if (!phone) return alert("Enter phone number");
-
-      fetch(`${scriptURL}?phone=${encodeURIComponent(phone)}`)
-        .then(res => res.text())
-        .then(text => {
-          try {
-            const data = JSON.parse(text);
-            for (const key in data) {
-              if (document.getElementById(key)) {
-                document.getElementById(key).value = data[key] || "";
-              }
-            }
-            document.getElementById("status").innerText = "Data loaded.";
-          } catch {
-            document.getElementById("status").innerText = "No data found.";
-          }
-        });
+  fetch(`https://script.google.com/macros/s/AKfycbx.../exec?phone=${encodeURIComponent(phone)}`)
+  .then(res => res.json())
+  .then(data => {
+    if (data.fullName) {
+      document.getElementById("fullName").value = data.fullName;
+      document.getElementById("email").value = data.email;
+      document.getElementById("address").value = data.address;
+      document.getElementById("city").value = data.city;
+      document.getElementById("yearOfPassing").value = data.yearOfPassing;
+      document.getElementById("spouseName").value = data.spouseName;
+      document.getElementById("childrenDetails").value = data.childrenDetails;
+      document.getElementById("profession").value = data.profession;
+      document.getElementById("organization").value = data.organization;
+      document.getElementById("hobbies").value = data.hobbies;
+      document.getElementById("willingToContribute").value = data.willingToContribute;
+      document.getElementById("accommodationRequired").value = data.accommodationRequired;
+      document.getElementById("accommodationDetails").value = data.accommodationDetails;
+      document.getElementById("arrivalDateTime").value = data.arrivalDateTime;
+      document.getElementById("departureDateTime").value = data.departureDateTime;
+      document.getElementById("assistanceRequired").value = data.assistanceRequired;
+    } else {
+      alert("No record found for this phone number.");
     }
+  })
+  .catch(err => console.error("Error:", err));
+}
+
 
     function submitData() {
       const fields = [
@@ -133,4 +142,5 @@
   </script>
 </body>
 </html>
+
 
