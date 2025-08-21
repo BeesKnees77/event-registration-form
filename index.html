@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Registration</title>
+  <style>
+    body { font-family: Arial; margin: 40px; max-width: 700px; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input, textarea, select { width: 100%; padding: 8px; margin-top: 5px; }
+    button { margin-top: 20px; padding: 10px 20px; }
+    #status { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Event Registration Form</h2>
+
+  <label>Phone Number:</label>
+  <input type="text" id="phone">
+
+  <button onclick="fetchData()">Fetch Existing Info</button>
+
+  <label>Full Name:</label>
+  <input type="text" id="fullName">
+
+  <label>Email ID:</label>
+  <input type="email" id="email">
+
+  <label>Current Address:</label>
+  <textarea id="address" rows="2"></textarea>
+
+  <label>City:</label>
+  <input type="text" id="city">
+
+  <label>Year of Passing:</label>
+  <select id="yearOfPassing">
+    <option value="">Select</option>
+    <option>1976</option>
+    <option>1977</option>
+    <option>1978</option>
+    <option>1979</option>
+    <option>1980</option>
+    <option>1981</option>
+  </select>
+
+  <label>Spouse's Name (Optional):</label>
+  <input type="text" id="spouseName">
+
+  <label>Children Details (Optional):</label>
+  <textarea id="childrenDetails" rows="2"></textarea>
+
+  <label>Professional Details:</label>
+  <input type="text" id="profession">
+
+  <label>Organisation/Business Name:</label>
+  <input type="text" id="organization">
+
+  <label>Special Interests/Hobbies:</label>
+  <textarea id="hobbies" rows="2"></textarea>
+
+  <label>Willing to Perform/Contribute in the Event:</label>
+  <select id="willingToContribute">
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
+
+  <label>Accommodation Requirement:</label>
+  <select id="accommodationRequired">
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
+
+  <label>If Yes, Accommodation Details:</label>
+  <textarea id="accommodationDetails" rows="2"></textarea>
+
+  <label>Arrival Date/Time to Jabalpur:</label>
+  <input type="datetime-local" id="arrivalDateTime">
+
+  <label>Departure Date/Time:</label>
+  <input type="datetime-local" id="departureDateTime">
+
+  <label>Any Special Assistance Required (health/mobility etc.):</label>
+  <textarea id="assistanceRequired" rows="2"></textarea>
+
+  <button onclick="submitData()">Submit / Update</button>
+
+  <div id="status"></div>
+
+  <script>
+    const scriptURL = "YOUR_SCRIPT_WEB_APP_URL"; // Replace with your actual URL
+
+    function fetchData() {
+      const phone = document.getElementById("phone").value;
+      if (!phone) return alert("Enter phone number");
+
+      fetch(`${scriptURL}?phone=${encodeURIComponent(phone)}`)
+        .then(res => res.text())
+        .then(text => {
+          try {
+            const data = JSON.parse(text);
+            for (const key in data) {
+              if (document.getElementById(key)) {
+                document.getElementById(key).value = data[key] || "";
+              }
+            }
+            document.getElementById("status").innerText = "Data loaded.";
+          } catch {
+            document.getElementById("status").innerText = "No data found.";
+          }
+        });
+    }
+
+    function submitData() {
+      const fields = [
+        "phone", "fullName", "email", "address", "city", "yearOfPassing",
+        "spouseName", "childrenDetails", "profession", "organization",
+        "hobbies", "willingToContribute", "accommodationRequired",
+        "accommodationDetails", "arrivalDateTime", "departureDateTime",
+        "assistanceRequired"
+      ];
+
+      const formData = new URLSearchParams();
+      for (const field of fields) {
+        formData.append(field, document.getElementById(field).value || "");
+      }
+
+      fetch(scriptURL, { method: "POST", body: formData })
+        .then(res => res.text())
+        .then(text => {
+          document.getElementById("status").innerText = text;
+        });
+    }
+  </script>
+</body>
+</html>
