@@ -91,7 +91,7 @@
 function fetchData() {
   const phone = document.getElementById("phone").value;
 
-  fetch(`https://script.google.com/macros/s/AKfycbx.../exec?phone=${encodeURIComponent(phone)}`)
+  fetch(`https://script.google.com/macros/s/AKfycbwGJBGiQ_SCEfxHNdT2et8cJNJr1EA0wrdEnH_fv_aDwj94mZy4g90jV0EmIPfHxCD6Dw/exec?phone=${encodeURIComponent(phone)}`)
   .then(res => res.json())
   .then(data => {
     if (data.fullName) {
@@ -142,5 +142,6 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
