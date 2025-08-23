@@ -51,13 +51,6 @@
   <label>Wedding Anniversary Date:</label>
   <input type="date" id="weddingDate">
 
-  <label>Willing to Perform/Contribute in the Event:</label>
-  <select id="willingToContribute">
-    <option value="">Select</option>
-    <option>Yes</option>
-    <option>No</option>
-  </select>
-
   <label>Accommodation Requirement:</label>
   <select id="accommodationRequired">
     <option value="">Select</option>
@@ -65,9 +58,7 @@
     <option>No</option>
   </select>
 
-  <label>If Yes, Accommodation Details:</label>
-  <textarea id="accommodationDetails" rows="2"></textarea>
-
+  
   <label>Arrival Date/Time to Jabalpur:</label>
   <input type="datetime-local" id="arrivalDateTime">
 
@@ -77,7 +68,7 @@
   <label>Number of Members Attending:</label>
   <input type="number" id="membersAttending" name="membersAttending" min="1">
 
-  <label>Attending Status:</label>
+  <label>Attending Alone/With spouse:</label>
   <select id="attendingStatus" name="attendingStatus">
     <option value="">Select</option>
     <option value="Alone">Alone</option>
@@ -96,21 +87,20 @@ function fetchData() {
   const dob = document.getElementById("dateOfBirth").value;
   console.log("DOB value from form:", dob);
 
-  fetch(`https://script.google.com/macros/s/AKfycbz62EvFnFGC15PJthosie0ohRttkk5rENoC36_7ORdOGWVfTErXLq1JQRDvWkSIdKVy5g/exec?phone=${encodeURIComponent(phone)}&dateOfBirth=${encodeURIComponent(dob)}`)
+  fetch(`https://script.google.com/macros/s/AKfycbz62EvFnFGC15PJthosie0ohRttkk5rENoC36_7ORdOGWVfTErXLq1JQRDvWkSIdKVy5g/exec?phone=${encodeURIComponent(phone)}`)
   .then(res => res.json())
   .then(data => {
     if (data.firstName) {
         document.getElementById("firstName").value = data.firstName || "";
         document.getElementById("lastName").value = data.lastName || "";
+        document.getElementById("lastName").value = data.dateOfBirth || "";
         document.getElementById("email").value = data.email || "";
         document.getElementById("address").value = data.address || "";
         document.getElementById("city").value = data.city || "";
         document.getElementById("branch").value = data.branch || "";
         document.getElementById("spouseName").value = data.spouseName || "";
         document.getElementById("weddingDate").value = data.weddingDate || "";
-        document.getElementById("willingToContribute").value = data.willingToContribute || "";
         document.getElementById("accommodationRequired").value = data.accommodationRequired || "";
-        document.getElementById("accommodationDetails").value = data.accommodationDetails || "";
         document.getElementById("arrivalDateTime").value = data.arrivalDateTime || "";
         document.getElementById("departureDateTime").value = data.departureDateTime || "";
         document.getElementById("membersAttending").value = data.membersAttending || "";
@@ -126,8 +116,7 @@ function fetchData() {
     function submitData() {
       const fields = [
         "phone", "firstName", "lastName", "dateOfBirth", "email", "address", "city",
-        "branch", "spouseName", "weddingDate", "willingToContribute",
-        "accommodationRequired", "accommodationDetails", "arrivalDateTime",
+        "branch", "spouseName", "weddingDate", "accommodationRequired", "arrivalDateTime",
         "departureDateTime", "membersAttending", "attendingStatus"
       ];
       
@@ -147,6 +136,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
