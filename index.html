@@ -36,16 +36,14 @@
   <label>City:</label>
   <input type="text" id="city">
 
-  <label>Year of Passing:</label>
-  <select id="yearOfPassing">
+  <label>Branch:</label>
+  <select id="branch">
     <option value="">Select</option>
-    <option>1976</option>
-    <option>1977</option>
-    <option>1978</option>
-    <option>1979</option>
-    <option>1980</option>
-    <option>1981</option>
-  </select>
+    <option>Civil</option>
+    <option>Mechanical</option>
+    <option>Electrical</option>
+    <option>Electronics & Telecommunication</option>
+    </select>
 
   <label>Spouse's Name (Optional):</label>
   <input type="text" id="spouseName">
@@ -111,7 +109,7 @@ function fetchData() {
         document.getElementById("email").value = data.email || "";
         document.getElementById("address").value = data.address || "";
         document.getElementById("city").value = data.city || "";
-        document.getElementById("yearOfPassing").value = data.yearOfPassing || "";
+        document.getElementById("branch").value = data.branch || "";
         document.getElementById("spouseName").value = data.spouseName || "";
         document.getElementById("weddingDate").value = data.weddingDate || "";
         document.getElementById("willingToContribute").value = data.willingToContribute || "";
@@ -133,7 +131,7 @@ function fetchData() {
     function submitData() {
       const fields = [
         "phone", "firstName", "lastName", "dateOfBirth", "email", "address", "city",
-        "yearOfPassing", "spouseName", "weddingDate", "willingToContribute",
+        "branch", "spouseName", "weddingDate", "willingToContribute",
         "accommodationRequired", "accommodationDetails", "arrivalDateTime",
         "departureDateTime", "membersAttending", "attendingStatus", "assistanceRequired"
       ];
@@ -153,6 +151,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
