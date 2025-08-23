@@ -128,6 +128,7 @@ function fetchData() {
         "assistanceRequired"
       ];
 
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwGJBGiQ_SCEfxHNdT2et8cJNJr1EA0wrdEnH_fv_aDwj94mZy4g90jV0EmIPfHxCD6Dw/exec";
       const formData = new URLSearchParams();
       for (const field of fields) {
         formData.append(field, document.getElementById(field).value || "");
@@ -142,6 +143,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
