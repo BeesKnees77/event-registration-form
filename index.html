@@ -86,6 +86,15 @@
   <label>Any Special Assistance Required (health/mobility etc.):</label>
   <textarea id="assistanceRequired" rows="2"></textarea>
 
+  <label>Payment Done:</label>
+  <select id="paymentDone" name="paymentDone">
+    <option>Yes</option>
+    <option>No</option>
+  </select>
+
+  <label>Upload Payment Screenshot:</label>
+  <input type="file" id="paymentImage" accept="image/*">
+  
   <button onclick="submitData()">Submit / Update</button>
 
   <div id="status"></div>
@@ -117,6 +126,7 @@ function fetchData() {
         document.getElementById("membersAttending").value = data.membersAttending || "";
         document.getElementById("attendingStatus").value = data.attendingStatus || "";
         document.getElementById("assistanceRequired").value = data.assistanceRequired || "";
+        document.getElementById("paymentDone").value = data.paymentDone || "";
     } else {
       alert("No record found for this phone number.");
     }
@@ -130,15 +140,21 @@ function fetchData() {
         "phone", "firstName", "lastName", "dateOfBirth", "email", "address", "city",
         "branch", "spouseName", "weddingDate", "willingToContribute",
         "accommodationRequired", "accommodationDetails", "arrivalDateTime",
-        "departureDateTime", "membersAttending", "attendingStatus", "assistanceRequired"
+        "departureDateTime", "membersAttending", "attendingStatus", "assistanceRequired", "paymentDone"
       ];
       
       const scriptURL = "https://script.google.com/macros/s/AKfycbz62EvFnFGC15PJthosie0ohRttkk5rENoC36_7ORdOGWVfTErXLq1JQRDvWkSIdKVy5g/exec";
-      const formData = new URLSearchParams();
+      
+      const formData = new FormData();
       for (const field of fields) {
         formData.append(field, document.getElementById(field).value || "");
       }
 
+      const fileInput = document.getElementById("paymentImage"); 
+      if (fileInput.files.length > 0) {
+        formData.append("paymentImage", fileInput.files[0]); 
+      }
+      
       fetch(scriptURL, { method: "POST", body: formData })
         .then(res => res.text())
         .then(text => {
@@ -148,6 +164,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
