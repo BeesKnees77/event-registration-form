@@ -94,7 +94,7 @@
     
 function fetchData() {
   const phone = document.getElementById("phone").value;
-  const dob = document.getElementById("dateOfBirth").value.trim();
+  const dob = document.getElementById("dateOfBirth").value;
 
   fetch(`https://script.google.com/macros/s/AKfycbz62EvFnFGC15PJthosie0ohRttkk5rENoC36_7ORdOGWVfTErXLq1JQRDvWkSIdKVy5g/exec?phone=${encodeURIComponent(phone)}&dateOfBirth=${encodeURIComponent(dob)}`)
   .then(res => res.json())
@@ -147,6 +147,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
