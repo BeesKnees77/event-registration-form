@@ -140,11 +140,6 @@ function fetchData() {
       for (const field of fields) {
         formData.append(field, document.getElementById(field).value || "");
       }
-
-      const fileInput = document.getElementById("paymentImage"); 
-      if (fileInput.files.length > 0) {
-        formData.append("paymentImage", fileInput.files[0]); 
-      }
       
       fetch(scriptURL, { method: "POST", body: formData })
         .then(res => res.text())
@@ -155,6 +150,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
