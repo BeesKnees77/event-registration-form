@@ -86,16 +86,6 @@
   
   <label>Any Special Assistance Required (health/mobility etc.):</label>
   <textarea id="assistanceRequired" rows="2"></textarea>
-
-  <label>Payment Done:</label>
-  <select id="paymentDone" name="paymentDone">
-    <option value="">Select</option>
-    <option>Yes</option>
-    <option>No</option>
-  </select>
-
-  <label>Upload Payment Screenshot:</label>
-  <input type="file" id="paymentImage" accept="image/*">
   
   <button onclick="submitData()">Submit / Update</button>
 
@@ -127,8 +117,7 @@ function fetchData() {
         document.getElementById("departureDateTime").value = data.departureDateTime || "";
         document.getElementById("membersAttending").value = data.membersAttending || "";
         document.getElementById("attendingStatus").value = data.attendingStatus || "";
-        document.getElementById("assistanceRequired").value = data.assistanceRequired || "";
-        document.getElementById("paymentDone").value = data.paymentDone || "";
+        document.getElementById("assistanceRequired").value = data.assistanceRequired || ""
     } else {
       alert("No record found for this phone number.");
     }
@@ -142,12 +131,12 @@ function fetchData() {
         "phone", "firstName", "lastName", "dateOfBirth", "email", "address", "city",
         "branch", "spouseName", "weddingDate", "willingToContribute",
         "accommodationRequired", "accommodationDetails", "arrivalDateTime",
-        "departureDateTime", "membersAttending", "attendingStatus", "assistanceRequired", "paymentDone"
+        "departureDateTime", "membersAttending", "attendingStatus", "assistanceRequired"
       ];
       
       const scriptURL = "https://script.google.com/macros/s/AKfycbz62EvFnFGC15PJthosie0ohRttkk5rENoC36_7ORdOGWVfTErXLq1JQRDvWkSIdKVy5g/exec";
       
-      const formData = new FormData();
+      const formData = new URLSearchParams();
       for (const field of fields) {
         formData.append(field, document.getElementById(field).value || "");
       }
@@ -166,6 +155,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
