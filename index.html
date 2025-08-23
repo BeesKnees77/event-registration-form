@@ -45,10 +45,10 @@
     <option>Electronics & Telecommunication</option>
     </select>
 
-  <label>Spouse's Name (Optional):</label>
+  <label>Spouse's Name:</label>
   <input type="text" id="spouseName">
 
-  <label>Wedding Anniversary Date (Optional):</label>
+  <label>Wedding Anniversary Date:</label>
   <input type="date" id="weddingDate">
 
   <label>Willing to Perform/Contribute in the Event:</label>
@@ -84,9 +84,7 @@
     <option value="With spouse">With spouse</option>
   </select>
   
-  <label>Any Special Assistance Required (health/mobility etc.):</label>
-  <textarea id="assistanceRequired" rows="2"></textarea>
-  
+ 
   <button onclick="submitData()">Submit / Update</button>
 
   <div id="status"></div>
@@ -116,8 +114,7 @@ function fetchData() {
         document.getElementById("arrivalDateTime").value = data.arrivalDateTime || "";
         document.getElementById("departureDateTime").value = data.departureDateTime || "";
         document.getElementById("membersAttending").value = data.membersAttending || "";
-        document.getElementById("attendingStatus").value = data.attendingStatus || "";
-        document.getElementById("assistanceRequired").value = data.assistanceRequired || ""
+        document.getElementById("attendingStatus").value = data.attendingStatus || ""
     } else {
       alert("No record found for this phone number.");
     }
@@ -131,7 +128,7 @@ function fetchData() {
         "phone", "firstName", "lastName", "dateOfBirth", "email", "address", "city",
         "branch", "spouseName", "weddingDate", "willingToContribute",
         "accommodationRequired", "accommodationDetails", "arrivalDateTime",
-        "departureDateTime", "membersAttending", "attendingStatus", "assistanceRequired"
+        "departureDateTime", "membersAttending", "attendingStatus"
       ];
       
       const scriptURL = "https://script.google.com/macros/s/AKfycbz62EvFnFGC15PJthosie0ohRttkk5rENoC36_7ORdOGWVfTErXLq1JQRDvWkSIdKVy5g/exec";
@@ -150,6 +147,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
