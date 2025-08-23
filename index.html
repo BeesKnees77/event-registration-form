@@ -18,9 +18,15 @@
 
   <button onclick="fetchData()">Fetch Existing Info</button>
 
-  <label>Full Name:</label>
-  <input type="text" id="fullName">
+  <label>First Name:</label>
+  <input type="text" id="firstName">
 
+  <label>Last Name:</label>
+  <input type="text" id="lastName">
+
+  <label>Date of Birth:</label>
+  <input type="text" id="dateOfBirth">
+  
   <label>Email ID:</label>
   <input type="email" id="email">
 
@@ -44,17 +50,8 @@
   <label>Spouse's Name (Optional):</label>
   <input type="text" id="spouseName">
 
-  <label>Children Details (Optional):</label>
-  <textarea id="childrenDetails" rows="2"></textarea>
-
-  <label>Professional Details:</label>
-  <input type="text" id="profession">
-
-  <label>Organisation/Business Name:</label>
-  <input type="text" id="organization">
-
-  <label>Special Interests/Hobbies:</label>
-  <textarea id="hobbies" rows="2"></textarea>
+  <label>Wedding Anniversary Date (Optional):</label>
+  <input type="date" id="weddingDate">
 
   <label>Willing to Perform/Contribute in the Event:</label>
   <select id="willingToContribute">
@@ -79,6 +76,19 @@
   <label>Departure Date/Time:</label>
   <input type="datetime-local" id="departureDateTime">
 
+  <label>Number of Members Attending:</label>
+  <input type="number" id="membersAttending" name="membersAttending" min="1">
+
+  <label>Attending Status:</label>
+  <select id="attendingStatus" name="attendingStatus">
+    <option value="Alone">Alone</option>
+    <option value="With spouse">With spouse</option>
+  </select>
+  
+  <!-- Accommodation Required -->
+  <label for="accommodationRequired">Accommodation Required:</label>
+  <input type="text" id="accommodationRequired" name="accommodationRequired"><br><br>
+
   <label>Any Special Assistance Required (health/mobility etc.):</label>
   <textarea id="assistanceRequired" rows="2"></textarea>
 
@@ -95,22 +105,23 @@ function fetchData() {
   .then(res => res.json())
   .then(data => {
     if (data.fullName) {
-      document.getElementById("fullName").value = data.fullName;
-      document.getElementById("email").value = data.email;
-      document.getElementById("address").value = data.address;
-      document.getElementById("city").value = data.city;
-      document.getElementById("yearOfPassing").value = data.yearOfPassing;
-      document.getElementById("spouseName").value = data.spouseName;
-      document.getElementById("childrenDetails").value = data.childrenDetails;
-      document.getElementById("profession").value = data.profession;
-      document.getElementById("organization").value = data.organization;
-      document.getElementById("hobbies").value = data.hobbies;
-      document.getElementById("willingToContribute").value = data.willingToContribute;
-      document.getElementById("accommodationRequired").value = data.accommodationRequired;
-      document.getElementById("accommodationDetails").value = data.accommodationDetails;
-      document.getElementById("arrivalDateTime").value = data.arrivalDateTime;
-      document.getElementById("departureDateTime").value = data.departureDateTime;
-      document.getElementById("assistanceRequired").value = data.assistanceRequired;
+        document.getElementById("firstName").value = data.firstName || "";
+        document.getElementById("lastName").value = data.lastName || "";
+        document.getElementById("dateOfBirth").value = data.dateOfBirth || "";
+        document.getElementById("email").value = data.email || "";
+        document.getElementById("address").value = data.address || "";
+        document.getElementById("city").value = data.city || "";
+        document.getElementById("yearOfPassing").value = data.yearOfPassing || "";
+        document.getElementById("spouseName").value = data.spouseName || "";
+        document.getElementById("weddingDate").value = data.weddingDate || "";
+        document.getElementById("willingToContribute").value = data.willingToContribute || "";
+        document.getElementById("accommodationRequired").value = data.accommodationRequired || "";
+        document.getElementById("accommodationDetails").value = data.accommodationDetails || "";
+        document.getElementById("arrivalDateTime").value = data.arrivalDateTime || "";
+        document.getElementById("departureDateTime").value = data.departureDateTime || "";
+        document.getElementById("membersAttending").value = data.membersAttending || "";
+        document.getElementById("attendingStatus").value = data.attendingStatus || "";
+        document.getElementById("assistanceRequired").value = data.assistanceRequired || "";
     } else {
       alert("No record found for this phone number.");
     }
@@ -121,13 +132,12 @@ function fetchData() {
 
     function submitData() {
       const fields = [
-        "phone", "fullName", "email", "address", "city", "yearOfPassing",
-        "spouseName", "childrenDetails", "profession", "organization",
-        "hobbies", "willingToContribute", "accommodationRequired",
-        "accommodationDetails", "arrivalDateTime", "departureDateTime",
-        "assistanceRequired"
+        "phone", "firstName", "lastName", "dateOfBirth", "email", "address", "city",
+        "yearOfPassing", "spouseName", "weddingDate", "willingToContribute",
+        "accommodationRequired", "accommodationDetails", "arrivalDateTime",
+        "departureDateTime", "membersAttending", "attendingStatus", "assistanceRequired"
       ];
-
+      
       const scriptURL = "https://script.google.com/macros/s/AKfycbwGJBGiQ_SCEfxHNdT2et8cJNJr1EA0wrdEnH_fv_aDwj94mZy4g90jV0EmIPfHxCD6Dw/exec";
       const formData = new URLSearchParams();
       for (const field of fields) {
@@ -143,6 +153,7 @@ function fetchData() {
   </script>
 </body>
 </html>
+
 
 
 
