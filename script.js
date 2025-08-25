@@ -1,4 +1,4 @@
-const scriptURL = 'YOUR_SCRIPT_WEB_APP_URL'; // Replace with your deployed Apps Script URL
+const scriptURL = 'https://script.google.com/macros/s/AKfycbz62EvFnFGC15PJthosie0ohRttkk5rENoC36_7ORdOGWVfTErXLq1JQRDvWkSIdKVy5g/exec'; // Replace with your deployed Apps Script URL
 
 function fetchByPhone() {
   const phone = document.getElementById('phone').value;
